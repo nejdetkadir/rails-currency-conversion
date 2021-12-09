@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/nejdetkadir/rails-currency-conversion/tree/master.svg?style=svg)](https://circleci.com/gh/nejdetkadir/rails-currency-conversion/tree/master)
 [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
 ![Ruby Version](https://img.shields.io/badge/ruby%20v-3.0.0-blue.svg)
 ![Rails Version](https://img.shields.io/badge/rails%20v-6.1.4-blue.svg)

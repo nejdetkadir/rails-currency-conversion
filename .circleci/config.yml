@@ -1,0 +1,68 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.0
+  node: circleci/node@2
+
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.0.0-node
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
+  quality:
+    docker:
+      - image: cimg/ruby:3.0.0-node
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: Run rubocop
+          command: bundle exec rubocop --require rubocop-rails
+  test:
+    parallelism: 3
+    docker:
+      - image: cimg/ruby:3.0.0-node
+      - image: postgres:14.1
+        environment:
+          POSTGRES_USER: rails_currency_conversion
+          POSTGRES_DB: rails_currency_conversion_test
+          POSTGRES_PASSWORD: rails_currency_conversion
+          POSTGRES_HOST: 127.0.0.1
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      PGHOST: 127.0.0.1
+      PGUSER: rails_currency_conversion
+      PGPASSWORD: rails_currency_conversion
+      RAILS_ENV: test
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace
+      - run: 
+          name: Run tests
+          command: bundle exec rspec
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - quality:
+          requires:
+            - build
+      - test:
+          requires:
+            - build
