@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2021_12_10_134959) do
 
   create_table "currencies", force: :cascade do |t|
     t.string "iso_code", null: false
-    t.float "rate", null: false
+    t.decimal "rate", null: false
     t.boolean "is_base", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
