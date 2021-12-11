@@ -33,9 +33,11 @@ class ConversionsController < ApplicationController
     params.require(:conversion).permit(:currency_id, :to_id)
   end
 
+  # rubocop:disable Naming/AccessorMethodName
   def get_conversations
     @conversions = Conversion.page(params[:page])
   end
+  # rubocop:enable Naming/AccessorMethodName
 
   def set_conversion
     @conversion = Conversion.find(params[:id])
