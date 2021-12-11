@@ -1,1 +1,6 @@
 h1 index page of conversions
+
+- @conversions.each do |con|
+  = con.as_json
+
+= paginate @conversions
