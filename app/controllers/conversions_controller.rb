@@ -1,7 +1,7 @@
 # app/controllers/conversions_controller.rb
 class ConversionsController < ApplicationController
   def index
-    @conversions = Conversion.all
+    @conversions = Conversion.page(params[:page])
   end
 
   def new; end

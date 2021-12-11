@@ -1,5 +1,5 @@
 = turbo_frame_tag dom_id(conversion) do
   .row
-    .col #{conversion.currency.iso_code}
-    .col #{conversion.to.iso_code}
-    .col #{conversion.currency.rate_of_to(conversion.to)}
+    .col-4.text-center #{conversion.currency.iso_code}
+    .col-4.text-center #{conversion.to.iso_code}
+    .col-4.text-center #{conversion.currency.rate_of_to(conversion.to)}

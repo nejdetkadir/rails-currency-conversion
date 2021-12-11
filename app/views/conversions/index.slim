@@ -1,11 +1,12 @@
-h1 index page of conversions
+h1.fw-bold.mb-5 Conversions
 
 = turbo_stream_from "conversions"
 
 = turbo_frame_tag "conversions" do
-  .d-flex
-    .row
-      .col From
-      .col To
-      .col Rate
+  .d-flex.conversions-table
+    .row.conversions-row.shadow
+      .col-4.tab From
+      .col-4.tab To
+      .col-4.tab Rate
       = render @conversions
+= paginate @conversions

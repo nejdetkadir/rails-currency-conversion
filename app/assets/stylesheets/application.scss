@@ -43,3 +43,20 @@ ul.pagination{
     }
   }
 }
+
+.conversions-table {
+  .conversions-row {
+    border: 1px solid gray;
+    width: 100%;
+  }
+
+  .col-4.tab{
+    text-align: center;
+    font-weight: bold;
+    padding: 1rem;
+  }
+
+  .col-4 {
+    border-bottom: 1px solid gray;
+  }
+}
