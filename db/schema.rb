@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_10_134959) do
+ActiveRecord::Schema.define(version: 2021_12_10_234944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "conversions", force: :cascade do |t|
+    t.bigint "currency_id", null: false
+    t.bigint "to_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["currency_id"], name: "index_conversions_on_currency_id"
+    t.index ["to_id"], name: "index_conversions_on_to_id"
+  end
 
   create_table "currencies", force: :cascade do |t|
     t.string "iso_code", null: false
@@ -24,4 +33,6 @@ ActiveRecord::Schema.define(version: 2021_12_10_134959) do
     t.index ["iso_code"], name: "index_currencies_on_iso_code", unique: true
   end
 
+  add_foreign_key "conversions", "currencies"
+  add_foreign_key "conversions", "currencies", column: "to_id"
 end
