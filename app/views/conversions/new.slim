@@ -1,2 +1,21 @@
 h1 Create a new currency conversion
 = render "form", model: @conversion
+
+table.table.table-striped
+  thead
+    tr
+      th(scope='col') From
+      th(scope='col') To
+      th(scope='col') Rate
+      th(scope='col') Action
+  tbody
+    - @conversions.each do |conversion|
+      tr
+        td #{conversion.currency.iso_code}
+        td #{conversion.to.iso_code}
+        td #{conversion.currency.rate_of_to(conversion.to)}
+        td
+          = button_to conversion_path(conversion), method: :delete, form: { data: { turbo: "false"} }, class: "btn btn-sm btn-danger"
+            = icon "fas", "trash", class: "text-white"
+            |&nbsp;Delete
+= paginate @conversions
