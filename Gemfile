@@ -29,6 +29,7 @@ gem 'font-awesome-sass', '~> 5.15.1'
 
 gem 'ruby-progressbar'
 
+gem 'slim'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
