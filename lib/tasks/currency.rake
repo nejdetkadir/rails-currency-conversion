@@ -7,7 +7,7 @@ namespace :currency do
     res = Net::HTTP.get_response(uri)
     body = JSON.parse(res.body)
 
-    progress_bar = ProgressBar.create(:title => "Currencies updating from fixer.io", :starting_at => 0, :total => body["rates"].count)
+    progress_bar = ProgressBar.create(title: "Currencies updating from fixer.io", starting_at: 0, total: body["rates"].count)
 
     if res.is_a?(Net::HTTPSuccess)
       body["rates"].each do |iso_code, rate|

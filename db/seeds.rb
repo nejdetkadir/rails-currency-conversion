@@ -9,10 +9,10 @@
 # run task
 Rake::Task['currency:update'].invoke
 
-progress_bar = ProgressBar.create(:title => "Sample conversions creating", :starting_at => 0, :total => 7)
+progress_bar = ProgressBar.create(title: "Sample conversions creating", starting_at: 0, total: 7)
 
-7.times {
-   Conversion.create(currency: Currency.all.sample, to: Currency.all.sample)
+7.times do
+  Conversion.create(currency: Currency.all.sample, to: Currency.all.sample)
 
-   progress_bar&.increment
-}
+  progress_bar&.increment
+end
