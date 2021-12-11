@@ -1,6 +1,11 @@
 h1 index page of conversions
 
-- @conversions.each do |con|
-  = con.as_json
+= turbo_stream_from "conversions"
 
-= paginate @conversions
+= turbo_frame_tag "conversions" do
+  .d-flex
+    .row
+      .col From
+      .col To
+      .col Rate
+      = render @conversions

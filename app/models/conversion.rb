@@ -1,4 +1,5 @@
 # app/models/conversion.rb
+# rubocop:disable Style/RedundantSelf
 class Conversion < ApplicationRecord
   # associations
   belongs_to :currency
@@ -10,7 +11,24 @@ class Conversion < ApplicationRecord
   # rubocop:enable Rails/UniqueValidationWithoutIndex
   validate :currency_equal_to_to
 
+  # scopes
+  default_scope { order(created_at: :desc) }
+
+  # callbacks
+  after_create_commit do
+    broadcast_prepend_to 'conversions'
+  end
+
+  after_update_commit do
+    broadcast_replace_to 'conversions'
+  end
+
+  after_destroy_commit do
+    broadcast_remove_to 'conversions', target: "conversion_#{self.id}"
+  end
+
   def currency_equal_to_to
     errors.add(:to, "equal to from") if currency == to
   end
 end
+# rubocop:enable Style/RedundantSelf
