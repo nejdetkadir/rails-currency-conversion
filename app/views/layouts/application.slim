@@ -22,7 +22,9 @@ html.h-100
                 = active_link_to "New Conversion", new_conversion_path, active: :exclusive, class: "nav-link"
     main.flex-shrink-0
       .container.mt-5
-        = yield
+        = render "shared/flash"
+        .mt-2
+          = yield
     footer.footer.mt-auto.py-3.bg-light
       .container
         span.text-muted Rails Currency Conversion | #{DateTime.now.year}

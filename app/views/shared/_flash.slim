@@ -1,0 +1,4 @@
+- flash.each do |type, message|
+  .alert.alert-dismissible.fade.show(role='alert' class="#{type.eql?('notice') ? 'alert-success' : 'alert-warning'}")
+    p #{message}
+    button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')

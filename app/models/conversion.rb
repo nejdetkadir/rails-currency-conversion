@@ -28,7 +28,7 @@ class Conversion < ApplicationRecord
   end
 
   def currency_equal_to_to
-    errors.add(:to, "equal to from") if currency == to
+    errors.add(:to, "equal to from") if currency == to && !to.nil?
   end
 end
 # rubocop:enable Style/RedundantSelf

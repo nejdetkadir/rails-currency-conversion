@@ -4,5 +4,24 @@ class ConversionsController < ApplicationController
     @conversions = Conversion.page(params[:page])
   end
 
-  def new; end
+  def new
+    @conversion = Conversion.new
+  end
+
+  def create
+    @conversion = Conversion.new(conversion_params)
+
+    if @conversion.save
+      flash[:notice] = "Conversion was successfully created."
+      redirect_to root_path
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def conversion_params
+    params.require(:conversion).permit(:currency_id, :to_id)
+  end
 end

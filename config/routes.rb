@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   root to: 'conversions#index'
 
-  resources :conversions, only: [:index, :new]
+  resources :conversions, except: [:edit, :update, :show]
 end

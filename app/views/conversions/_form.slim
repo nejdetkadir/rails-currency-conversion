@@ -1,0 +1,8 @@
+= simple_form_for model, id: dom_id(model), html: { data: { turbo: "false"}} do |f|
+  = render "shared/errors", model: model
+  .mb-3
+    = f.input :currency_id, collection: Currency.all, value_method: :id, label_method: :iso_code, prompt: "Select a currency", label: "From"
+  .mb-3
+    = f.input :to_id, collection: Currency.all, value_method: :id, label_method: :iso_code, prompt: "Select a currency", label: "To"
+  .mb-3
+    = f.submit class: "btn btn-success"
